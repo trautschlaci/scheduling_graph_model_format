@@ -1,0 +1,344 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/scheduling.schema.json",
+  "title": "Scheduling Schema",
+  "description": "Schema for Graph-Based Modeling of Scheduling Problems",
+  "definitions": {
+    "tuple_element": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["int", "list", "index"]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {"type": { "enum" : ["int", "index"] }},
+          "required": ["id", "type"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "type": { "enum" : ["list"] },
+            "list_element_type": {"$ref": "#/definitions/list_element_type"}
+          },
+          "required": ["id", "type", "list_element_type"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "list_element_type": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["int", "index", "tuple"]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {"type": { "enum" : ["int", "index"] }},
+          "required": ["type"],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "type": { "enum" : ["tuple"] },
+            "tuple_elements": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/tuple_element"},
+              "minItems": 1
+            }
+          },
+          "required": ["type", "tuple_elements"],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+
+  "type": "object",
+  "properties": {
+
+    "variable_types": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "for_type": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["int", "list", "index", "tuple"]
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {"type": { "enum" : ["int", "index"] }},
+            "required": ["id", "for_type", "type"],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "type": { "enum" : ["list"] },
+              "list_element_type":{"$ref": "#/definitions/list_element_type"}
+            },
+            "required": ["id", "for_type", "type", "list_element_type"],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "type": { "enum" : ["tuple"] },
+              "tuple_elements": {
+                "type": "array",
+                "items": {"$ref": "#/definitions/tuple_element"},
+                "minItems": 1
+              }
+            },
+            "required": ["id", "for_type", "type", "tuple_elements"],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+
+    "types": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "default": ""
+          },
+          "compound": {
+            "type": "array",
+            "default": [],
+            "items": {
+              "type": "integer"
+            }
+          },
+          "modeled": {
+            "type": "boolean",
+            "default": true
+          },
+          "has_parents": {
+            "type": "boolean",
+            "default": true
+          },
+          "initialization_rules": {
+            "type": "array",
+            "default": [],
+            "items": {
+              "type": "object",
+              "properties": {
+                "examined_type": {
+                  "type": "integer"
+                },
+                "applied_type": {
+                  "type": "integer"
+                },
+                "selector": {
+                  "type": "string",
+                  "default": ""
+                }
+              },
+              "required": ["examined_type", "applied_type"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "modeled": { "enum" : [false] }
+            },
+            "required": ["id", "modeled"],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "modeled": { "enum" : [true] },
+              "selected": {
+                "type": "boolean",
+                "default": false
+              }
+            },
+            "required": ["id"],
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "from": {
+            "type": "integer"
+          },
+          "to": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 1
+          },
+          "filters": {
+            "type": "array",
+            "default": [],
+            "items": {
+              "type": "object",
+              "properties": {
+                "base_type": {
+                  "type": "integer"
+                },
+                "examined_type": {
+                  "type": "integer"
+                },
+                "applied_type": {
+                  "type": "integer"
+                },
+                "selector": {
+                  "type": "string",
+                  "default": ""
+                }
+              },
+              "required": ["base_type", "examined_type", "applied_type"],
+              "additionalProperties": false
+            }
+          },
+          "select": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "select": {
+                "enum": [true]
+              }
+            },
+            "required": ["id", "from", "to", "select", "filters"],
+            "additionalProperties": false
+          },
+          {
+            "properties": {
+              "select": {
+                "enum": [false]
+              },
+              "min": {
+                "type": ["integer", "string"],
+                "default": ""
+              },
+              "max": {
+                "type": ["integer", "string"],
+                "default": ""
+              }
+            },
+            "oneOf": [
+              {
+                "properties": {
+                  "soft_mins": {
+                    "type": "array",
+                    "items": {
+                      "type": ["integer", "string"]
+                    },
+                    "minItems": 1
+                  },
+                  "soft_min_points": {
+                    "type": "array",
+                    "items": {
+                      "type": ["integer", "string"]
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": ["id", "from", "to", "soft_mins", "soft_min_points"],
+                "additionalProperties": false
+              },
+              {
+                "properties": {
+                  "soft_maxs": {
+                    "type": "array",
+                    "items": {
+                      "type": ["integer", "string"]
+                    },
+                    "minItems": 1
+                  },
+                  "soft_max_points": {
+                    "type": "array",
+                    "items": {
+                      "type": ["integer", "string"]
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": ["id", "from", "to", "soft_maxs", "soft_max_points"],
+                "additionalProperties": false
+              },
+              {
+                "properties": {
+                  "soft_mins": {
+                    "type": "array",
+                    "items": {
+                      "type": ["integer", "string"]
+                    },
+                    "minItems": 1
+                  },
+                  "soft_min_points": {
+                    "type": "array",
+                    "items": {
+                      "type": ["integer", "string"]
+                    },
+                    "minItems": 1
+                  },
+                  "soft_maxs": {
+                    "type": "array",
+                    "items": {
+                      "type": ["integer", "string"]
+                    },
+                    "minItems": 1
+                  },
+                  "soft_max_points": {
+                    "type": "array",
+                    "items": {
+                      "type": ["integer", "string"]
+                    },
+                    "minItems": 1
+                  }
+                },
+                "required": ["id", "from", "to", "soft_mins", "soft_min_points", "soft_maxs", "soft_max_points"],
+                "additionalProperties": false
+              },
+              {
+                "required": ["id", "from", "to"],
+                "additionalProperties": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+
+  },
+  "required": ["types", "rules"],
+  "additionalProperties": false
+}

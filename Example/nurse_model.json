@@ -1,0 +1,238 @@
+
+{
+  "variable_types": [
+    {"id": 0, "for_type": 1, "type": "list", "list_element_type": {"type": "index"}},
+    {"id": 1, "for_type": 0, "type": "list", "list_element_type": {"type": "index"}},
+    {"id": 2, "for_type": 5, "type": "int"},
+    {"id": 3, "for_type": 5, "type": "list", "list_element_type": {"type": "index"}},
+    {"id": 4, "for_type": 1, "type": "list", "list_element_type": {"type": "index"}},
+    {"id": 5, "for_type": 5, "type": "list",
+      "list_element_type": {"type": "tuple",
+        "tuple_elements": [
+          {"id": 0, "type": "index"},
+          {"id": 1, "type": "int"}
+        ]
+      }
+    },
+    {"id": 6, "for_type": 5, "type": "list",
+      "list_element_type": {"type": "tuple",
+        "tuple_elements": [
+          {"id": 0, "type": "index"},
+          {"id": 1, "type": "list",
+            "list_element_type": {"type": "tuple",
+              "tuple_elements": [
+                {"id": 0, "type": "index"},
+                {"id": 1, "type": "int"}
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {"id": 7, "for_type": 5, "type": "list",
+      "list_element_type": {"type": "tuple",
+        "tuple_elements": [
+          {"id": 0, "type": "index"},
+          {"id": 1, "type": "list",
+            "list_element_type": {"type": "tuple",
+              "tuple_elements": [
+                {"id": 0, "type": "index"},
+                {"id": 1, "type": "int"}
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {"id": 8, "for_type": 15, "type": "tuple",
+      "tuple_elements": [
+        {"id": 0, "type": "int"},
+        {"id": 1, "type": "int"},
+        {"id": 2, "type": "int"}
+      ]
+    },
+    {"id": 9, "for_type": 5, "type": "tuple",
+      "tuple_elements": [
+        {"id": 0, "type": "int"},
+        {"id": 1, "type": "int"}
+      ]
+    },
+    {"id": 10, "for_type": 5, "type": "int"},
+    {"id": 11, "for_type": 5, "type": "int"},
+    {"id": 12, "for_type": 5, "type": "int"}
+  ],
+
+
+  "types": [
+    {"id": 0, "name": "Day", "modeled": false},
+    {"id": 1, "name": "Shift", "modeled": false},
+    {"id": 2, "name": "Interval", "modeled": false},
+    {"id": 3, "name": "ON", "modeled": false},
+    {"id": 4, "name": "OFF", "modeled": false},
+
+    {"id": 5, "name": "Employee", "selected": true},
+    {"id": 6, "name": "EDGE", "selected": true},
+    {"id": 7, "name": "END", "selected": true},
+    {"id": 8, "name": "NOT_END", "selected": true},
+    {"id": 9, "name": "Weekend", "selected": true},
+
+    {"id": 10, "name": "Emp_Cons_ON", "compound": [0, 3, 5], "has_parents": false},
+    {"id": 11, "name": "Emp_Cons_OFF", "compound": [0, 4, 5], "has_parents": false},
+    {"id": 12, "name": "Day X OFF", "compound": [0, 4], "has_parents": false, "selected": true},
+    {"id": 13, "name": "Day X ON", "compound": [0, 3], "has_parents": false, "selected": true},
+    {"id": 14, "name": "Day X Interval", "compound": [0, 2], "has_parents": false, "selected": true},
+    {"id": 15, "name": "Day X Shift", "compound": [0, 1], "has_parents": false, "selected": true},
+
+    {"id": 16, "compound": [11, 8]},
+    {"id": 17, "compound": [11, 7]},
+    {"id": 18, "compound": [11, 12],
+      "initialization_rules": [{"examined_type":12, "applied_type": 0, "selector":  "[_:]"}]
+    },
+    {"id": 19, "compound": [11, 5],
+      "initialization_rules": [{"examined_type":5, "applied_type": 5}]
+    },
+    {"id": 20, "compound": [11, 6]},
+    {"id": 21, "compound": [10, 8]},
+    {"id": 22, "compound": [10, 7]},
+    {"id": 23, "compound": [10, 13],
+      "initialization_rules": [{"examined_type":13, "applied_type": 0, "selector":  "[_:_+{2}]"}]
+    },
+    {"id": 24, "compound": [10, 5],
+      "initialization_rules": [{"examined_type":5, "applied_type": 5}]
+    },
+    {"id": 25, "compound": [10, 6]},
+    {"id": 26, "compound": [12, 6], "selected": true},
+    {"id": 27, "compound": [13, 6], "selected": true},
+    {"id": 28, "compound": [12, 8], "selected": true},
+    {"id": 29, "compound": [13, 8], "selected": true},
+    {"id": 30, "compound": [12, 12], "selected": true,
+      "initialization_rules": [{"examined_type": 12, "applied_type": 0, "selector": "[_-1, _+1]"}]
+    },
+    {"id": 31, "compound": [12, 5]},
+    {"id": 32, "compound": [12, 7], "selected": true},
+    {"id": 33, "compound": [5, 14]},
+    {"id": 34, "compound": [5, 9]},
+    {"id": 35, "compound": [5, 13]},
+    {"id": 36, "compound": [5, 15]},
+    {"id": 37, "compound": [14, 15], "selected": true,
+      "initialization_rules": [
+        {"examined_type":14, "applied_type": 0},
+        {"examined_type":14, "applied_type": 2, "selector": "{0}"}
+      ]
+    },
+    {"id": 38, "compound": [7, 13], "selected": true},
+    {"id": 39, "compound": [9, 13], "selected": true,
+      "initialization_rules": [{"examined_type": 9, "applied_type": 9, "selector": "{1}"}]
+    },
+    {"id": 40, "compound": [15, 13], "selected": true,
+      "initialization_rules": [{"examined_type": 13, "applied_type": 0}]
+    },
+    {"id": 41, "compound": [13, 13], "selected": true,
+      "initialization_rules": [{"examined_type": 13, "applied_type": 0, "selector": "[_-1, _+1]"}]
+    },
+
+    {"id": 42, "compound": [36, 35, 40]},
+    {"id": 43, "compound": [36, 33, 37]},
+    {"id": 44, "compound": [35, 34, 39]},
+    {"id": 45, "compound": [27, 23, 25]},
+    {"id": 46, "compound": [26, 18, 20]},
+    {"id": 47, "compound": [35, 23, 24]},
+    {"id": 48, "compound": [31, 18, 19]},
+    {"id": 49, "compound": [41, 23, 23]},
+    {"id": 50, "compound": [30, 18, 18]},
+    {"id": 51, "compound": [23, 38, 22]},
+    {"id": 52, "compound": [23, 29, 21]},
+    {"id": 53, "compound": [18, 32, 17]},
+    {"id": 54, "compound": [18, 28, 16]}
+  ],
+
+
+  "rules": [
+    {"id": 0, "from": 5, "to": [31, 35], "filters": [{"base_type": 13, "examined_type": 12, "applied_type": 0}], "min": 1, "max": 1},
+    {"id": 1, "from": 5, "to": [31], "filters": [{"base_type": 5, "examined_type": 12, "applied_type": 0, "selector": "{3}"}], "select": true},
+    {"id": 2, "from": 5, "to": [36],
+      "filters": [
+        {"base_type": 15, "examined_type": 15, "applied_type": 0, "selector": "[_+1]"},
+        {"base_type": 15, "examined_type": 15, "applied_type": 1, "selector": "{4}"}
+      ],
+      "max": 1
+    },
+    {"id": 3, "from": 5, "to": [36], "filters": [{"base_type": 5, "examined_type": 15, "applied_type": 1, "selector": "{5.0}"}], "max": "{5.1}"},
+    {"id": 4, "from": 5, "to": [36],
+      "filters": [
+        {"base_type": 5, "examined_type": 15, "applied_type": 0, "selector": "{6.0}"},
+        {"base_type": 5, "examined_type": 15, "applied_type": 1, "selector": "{6.1.0}"}
+      ],
+      "soft_mins": [1],
+      "soft_min_points": ["{6.1.1}"]
+    },
+    {"id": 5, "from": 5, "to": [36],
+      "filters": [
+        {"base_type": 5, "examined_type": 15, "applied_type": 0, "selector": "{7.0}"},
+        {"base_type": 5, "examined_type": 15, "applied_type": 1, "selector": "{7.1.0}"}
+      ],
+      "soft_maxs": [0],
+      "soft_max_points": ["{7.1.1}"]
+    },
+    {"id": 6, "from": 15, "to": [36],
+      "soft_mins": ["{8.0}"],
+      "soft_min_points": ["({8.0}-{E})*{8.1}"],
+      "soft_maxs": ["{8.0}"],
+      "soft_max_points": ["({E}-{8.0})*{8.2}"]
+    },
+    {"id": 7, "from": 5, "to": [33], "min": "{9.0}", "max": "{9.1}"},
+    {"id": 8, "from": 5, "to": [34], "max": "{10}"},
+    {"id": 9, "from": 10, "to": [23], "filters": [{"base_type": 10, "examined_type": 13, "applied_type": 0}], "select": true},
+    {"id": 10, "from": 11, "to": [18], "filters": [{"base_type": 11, "examined_type": 12, "applied_type": 0}], "select": true},
+    {"id": 11, "from": 10, "to": [23], "max": "{2}"},
+    {"id": 12, "from": 10, "to": [22, 21], "min": 1, "max": 1},
+    {"id": 13, "from": 11, "to": [17, 16], "min": 1, "max": 1},
+    {"id": 14, "from": 5, "to": [35, 24],
+      "filters": [
+        {"base_type": 13, "examined_type": 10, "applied_type": 0, "selector": "[_+1]"}
+      ],
+      "max": 1
+    },
+    {"id": 15, "from": 5, "to": [31, 19],
+      "filters": [
+        {"base_type": 12, "examined_type": 11, "applied_type": 0, "selector": "[_+1]"}
+      ],
+      "max": 1
+    },
+    {"id": 16, "from": 11, "to": [19], "filters": [{"base_type": 11, "examined_type": 5, "applied_type": 5}], "select": true},
+    {"id": 17, "from": 10, "to": [24], "filters": [{"base_type": 10, "examined_type": 5, "applied_type": 5}], "select": true},
+    {"id": 18, "from": 11, "to": [20], "filters": [{"base_type": 11, "examined_type": 6, "applied_type": 6, "selector": "_"}], "select": true},
+    {"id": 19, "from": 10, "to": [25], "filters": [{"base_type": 10, "examined_type": 6, "applied_type": 6, "selector": "_"}], "select": true},
+
+    {"id": 20, "from": 35, "to": [42], "min": 1, "max": 1},
+    {"id": 21, "from": 33, "to": [43], "min": 1, "max": 1},
+    {"id": 22, "from": 34, "to": [44], "min": 1},
+    {"id": 23, "from": 25, "to": [45], "min": 2, "max": 2},
+    {"id": 24, "from": 20, "to": [46], "min": 2, "max": 2},
+    {"id": 25, "from": 25, "to": [45], "filters": [{"base_type": 10, "examined_type": 13, "applied_type": 0}], "select": true},
+    {"id": 26, "from": 23, "to": [45], "filters": [{"base_type": 10, "examined_type": 13, "applied_type": 0}], "select": true},
+    {"id": 27, "from": 20, "to": [46], "filters": [{"base_type": 11, "examined_type": 12, "applied_type": 0}], "select": true},
+    {"id": 28, "from": 18, "to": [46], "filters": [{"base_type": 11, "examined_type": 12, "applied_type": 0}], "select": true},
+    {"id": 29, "from": 35, "to": [47], "min": 1, "max": 1},
+    {"id": 30, "from": 31, "to": [48], "min": 1, "max": 1},
+    {"id": 31, "from": 23, "to": [49, 45], "min": 2, "max": 2},
+    {"id": 32, "from": 18, "to": [50, 46], "min": 2, "max": 2},
+    {"id": 33, "from": 23, "to": [51, 52], "min": 1, "max": 1},
+    {"id": 34, "from": 18, "to": [53, 54], "min": 1, "max": 1},
+    {"id": 35, "from": 23, "to": [51], "filters": [{"base_type": 10, "examined_type": 13, "applied_type": 0, "selector": "[0, -1]"}], "select": true},
+    {"id": 36, "from": 18, "to": [53], "filters": [{"base_type": 11, "examined_type": 12, "applied_type": 0, "selector": "[0, -1]"}], "select": true},
+    {"id": 37, "from": 22, "to": [51], "filters": [{"base_type": 10, "examined_type": 13, "applied_type": 0, "selector": "[0, -1]"}], "min": 1},
+    {"id": 38, "from": 17, "to": [53], "filters": [{"base_type": 11, "examined_type": 12, "applied_type": 0, "selector": "[0, -1]"}], "min": 1},
+    {"id": 39, "from": 21, "to": [52], "min": "{11}"},
+    {"id": 40, "from": 16, "to": [54], "min": "{12}"},
+    {"id": 41, "from": 36, "to": [42], "filters": [{"base_type": 15, "examined_type": 13, "applied_type": 0}], "select": true},
+    {"id": 42, "from": 36, "to": [43],
+      "filters": [
+        {"base_type": 15, "examined_type":14, "applied_type": 0},
+        {"base_type": 15, "examined_type":14, "applied_type": 2, "selector": "{0}"}
+      ], "select": true},
+    {"id": 43, "from": 35, "to": [44], "filters": [{"base_type": 13, "examined_type":9, "applied_type": 9, "selector": "{1}"}], "select": true},
+    {"id": 44, "from": 23, "to": [47], "filters": [{"base_type": 10, "examined_type": 5, "applied_type": 5}], "select": true},
+    {"id": 45, "from": 18, "to": [48], "filters": [{"base_type": 11, "examined_type": 5, "applied_type": 5}], "select": true}
+  ]
+}
